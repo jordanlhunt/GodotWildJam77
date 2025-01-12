@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brp22dy6bdr45"]
+
+[ext_resource type="Script" path="res://Scripts/BlockShape.gd" id="1_4p8lu"]
+
+[node name="BlockShape" type="Node2D"]
+script = ExtResource("1_4p8lu")
