@@ -1,14 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu0n0a5ojo5q6"]
+[gd_scene load_steps=4 format=3 uid="uid://bu0n0a5ojo5q6"]
 
+[ext_resource type="Script" path="res://Scenes/UI/gui.gd" id="1_o8dul"]
 [ext_resource type="FontFile" uid="uid://cda5d38i0lq0j" path="res://Assets/Font/Xanmono-Regular.ttf" id="1_we3eq"]
 [ext_resource type="Texture2D" uid="uid://dn8okg1yllvs4" path="res://Assets/Textures/tile.png" id="2_t8rbm"]
 
 [node name="GUI" type="PanelContainer"]
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_right = 390.0
 grow_vertical = 2
+script = ExtResource("1_o8dul")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
