@@ -1,7 +1,7 @@
-extends PanelContainer
+extends CenterContainer
 
-@onready var playAreaGrid := get_node("HBoxContainer/RightSide/PlayAreaGrid")
-@onready var nextShapeGrid := get_node("HBoxContainer/LeftSide/VBox/NextShapeContainer/NextShapeGrid")
+@onready var playAreaGrid := get_node("PanelContainer/HBoxContainer/RightSide/PlayAreaGrid")
+@onready var nextShapeGrid := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NextShapeContainer/NextShapeGrid")
 
 const TOTAL_CELLS: int = 200
 const CELL_BACKGROUND: Color = Color(.1, .1, .1) # Off-black
@@ -26,3 +26,20 @@ func clear_cells(node, color: Color) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+## Button Presses
+
+func _on_about_pressed() -> void:
+	emit_signal("button_pressed","About")
+
+
+func _on_music_toggle_pressed() -> void:
+	emit_signal("button_pressed","Music")
+
+func _on_pause_pressed() -> void:
+	emit_signal("button_pressed","Pause")
+
+
+func _on_new_game_pressed() -> void:
+	emit_signal("button_pressed","NewGame")
