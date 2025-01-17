@@ -1,6 +1,74 @@
-[gd_scene load_steps=2 format=3 uid="uid://brp22dy6bdr45"]
+[gd_scene load_steps=3 format=3 uid="uid://brp22dy6bdr45"]
 
-[ext_resource type="Script" path="res://Scripts/BlockShape.gd" id="1_4p8lu"]
+[ext_resource type="Texture2D" uid="uid://dn8okg1yllvs4" path="res://Assets/Textures/tile.png" id="1_0dupo"]
 
-[node name="BlockShape" type="Node2D"]
-script = ExtResource("1_4p8lu")
+[sub_resource type="GDScript" id="GDScript_11pjh"]
+script/source = "class_name BlockShape
+
+## Export Properties
+
+
+
+extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="Shapes" type="GridContainer"]
+offset_right = 26.0
+offset_bottom = 30.0
+script = SubResource("GDScript_11pjh")
+
+[node name="LShape" type="GridContainer" parent="."]
+modulate = Color(1, 0.462745, 1, 1)
+layout_mode = 2
+columns = 3
+
+[node name="BlankCell" type="TextureRect" parent="LShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell2" type="TextureRect" parent="LShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell" type="TextureRect" parent="LShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell2" type="TextureRect" parent="LShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell3" type="TextureRect" parent="LShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell4" type="TextureRect" parent="LShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell3" type="TextureRect" parent="LShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell4" type="TextureRect" parent="LShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell5" type="TextureRect" parent="LShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")

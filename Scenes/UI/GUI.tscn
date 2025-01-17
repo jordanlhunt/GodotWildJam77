@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bu0n0a5ojo5q6"]
 
-[ext_resource type="Script" path="res://Scenes/UI/gui.gd" id="1_o8dul"]
+[ext_resource type="Script" path="res://Scripts/gui.gd" id="1_o8dul"]
 [ext_resource type="FontFile" uid="uid://cda5d38i0lq0j" path="res://Assets/Font/Xanmono-Regular.ttf" id="1_we3eq"]
 [ext_resource type="Texture2D" uid="uid://dn8okg1yllvs4" path="res://Assets/Textures/tile.png" id="2_t8rbm"]
 [ext_resource type="PackedScene" uid="uid://i8sfe5awpf4x" path="res://Scenes/UI/AboutDialog.tscn" id="4_hb4xs"]
