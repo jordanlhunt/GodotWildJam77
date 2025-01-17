@@ -2,6 +2,7 @@ extends CenterContainer
 
 @onready var playAreaGrid := get_node("PanelContainer/HBoxContainer/RightSide/PlayAreaGrid")
 @onready var nextShapeGrid := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NextShapeContainer/NextShapeGrid")
+@onready var aboutBox := get_node("AboutBox")
 
 const TOTAL_CELLS: int = 200
 const CELL_BACKGROUND: Color = Color(.1, .1, .1) # Off-black
@@ -31,6 +32,7 @@ func _process(delta: float) -> void:
 ## Button Presses
 
 func _on_about_pressed() -> void:
+	aboutBox.popup_centered()
 	emit_signal("button_pressed","About")
 
 

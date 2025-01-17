@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://i8sfe5awpf4x"]
+
+[node name="AboutBox" type="AcceptDialog"]
+auto_translate_mode = 1
+title = "How To Play"
+dialog_text = "* Spacebar - Drop the shape instantly
+* Down arrow / S key - Slowly drop the shape
+* Left arrow / A Key - Move left
+* Right arrow / D Key - Move Right
+* Up arrow / W Key - Rotate clockwise
+* Shift + Up arrow / W Key - rotate counter-clockwise"

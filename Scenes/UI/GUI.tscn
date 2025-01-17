@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bu0n0a5ojo5q6"]
+[gd_scene load_steps=5 format=3 uid="uid://bu0n0a5ojo5q6"]
 
 [ext_resource type="Script" path="res://Scenes/UI/gui.gd" id="1_o8dul"]
 [ext_resource type="FontFile" uid="uid://cda5d38i0lq0j" path="res://Assets/Font/Xanmono-Regular.ttf" id="1_we3eq"]
 [ext_resource type="Texture2D" uid="uid://dn8okg1yllvs4" path="res://Assets/Textures/tile.png" id="2_t8rbm"]
+[ext_resource type="PackedScene" uid="uid://i8sfe5awpf4x" path="res://Scenes/UI/AboutDialog.tscn" id="4_hb4xs"]
 
 [node name="GUI" type="CenterContainer"]
 anchors_preset = 8
@@ -168,6 +169,9 @@ texture = ExtResource("2_t8rbm")
 [node name="TextureRect4" type="TextureRect" parent="PanelContainer/HBoxContainer/RightSide/PlayAreaGrid"]
 layout_mode = 2
 texture = ExtResource("2_t8rbm")
+
+[node name="AboutBox" parent="." instance=ExtResource("4_hb4xs")]
+size = Vector2i(421, 210)
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/LeftSide/VBox/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/LeftSide/VBox/Pause" to="." method="_on_pause_pressed"]
