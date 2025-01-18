@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhxq30rrnq0ce"]
+
+[ext_resource type="Script" path="res://Scenes/Testing/intergration_testing.gd" id="1_p588q"]
+[ext_resource type="FontFile" uid="uid://cda5d38i0lq0j" path="res://Assets/Font/Xanmono-Regular.ttf" id="2_315qe"]
+
+[node name="IntergrationTesting" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_p588q")
+
+[node name="Grid" type="Label" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 264.0
+offset_right = 288.0
+offset_bottom = 287.0
+theme_override_fonts/font = ExtResource("2_315qe")
+text = "Grid
+"
+
+[node name="Shape" type="Label" parent="."]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 136.0
+offset_right = 304.0
+offset_bottom = 159.0
+theme_override_fonts/font = ExtResource("2_315qe")
+text = "Shape
+"
+
+[node name="PickShape" type="Button" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 64.0
+offset_right = 360.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("2_315qe")
+text = "Pick a Shape
+"
+
+[node name="RotateLeft" type="Button" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 408.0
+offset_right = 232.0
+offset_bottom = 434.0
+theme_override_fonts/font = ExtResource("2_315qe")
+text = "Rotate Left"
+
+[node name="RotateRight" type="Button" parent="."]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 408.0
+offset_right = 472.0
+offset_bottom = 434.0
+theme_override_fonts/font = ExtResource("2_315qe")
+text = "Rotate Right
+"
+
+[connection signal="pressed" from="PickShape" to="." method="_on_pick_shape_pressed"]
+[connection signal="pressed" from="RotateLeft" to="." method="_on_rotate_left_pressed"]
+[connection signal="pressed" from="RotateRight" to="." method="_on_rotate_right_pressed"]

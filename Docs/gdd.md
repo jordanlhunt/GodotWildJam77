@@ -69,4 +69,3 @@ Play a jingle when clearing lines
 ## Animations
 
 Have a visual effect when lines are cleared
-

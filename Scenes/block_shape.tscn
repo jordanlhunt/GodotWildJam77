@@ -1,31 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://brp22dy6bdr45"]
 
 [ext_resource type="Texture2D" uid="uid://dn8okg1yllvs4" path="res://Assets/Textures/tile.png" id="1_0dupo"]
-
-[sub_resource type="GDScript" id="GDScript_11pjh"]
-script/source = "class_name BlockShape
-
-## Export Properties
-
-
-
-extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
+[ext_resource type="Script" path="res://Scenes/block_shape.gd" id="1_f88ns"]
 
 [node name="Shapes" type="GridContainer"]
 offset_right = 26.0
 offset_bottom = 30.0
-script = SubResource("GDScript_11pjh")
+columns = 3
+script = ExtResource("1_f88ns")
 
 [node name="LShape" type="GridContainer" parent="."]
 modulate = Color(1, 0.462745, 1, 1)
@@ -70,5 +52,291 @@ texture = ExtResource("1_0dupo")
 
 [node name="BlankCell5" type="TextureRect" parent="LShape"]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="JShape" type="GridContainer" parent="."]
+modulate = Color(0.470231, 0.819215, 0.156091, 1)
+layout_mode = 2
+columns = 3
+
+[node name="Cell" type="TextureRect" parent="JShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell" type="TextureRect" parent="JShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell2" type="TextureRect" parent="JShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell2" type="TextureRect" parent="JShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell3" type="TextureRect" parent="JShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell4" type="TextureRect" parent="JShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell3" type="TextureRect" parent="JShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell4" type="TextureRect" parent="JShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell5" type="TextureRect" parent="JShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="SShape" type="GridContainer" parent="."]
+modulate = Color(0.863412, 0.688706, 0.10651, 1)
+layout_mode = 2
+columns = 3
+
+[node name="BlankCell" type="TextureRect" parent="SShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell" type="TextureRect" parent="SShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell2" type="TextureRect" parent="SShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell3" type="TextureRect" parent="SShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell4" type="TextureRect" parent="SShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell2" type="TextureRect" parent="SShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell3" type="TextureRect" parent="SShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell4" type="TextureRect" parent="SShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell5" type="TextureRect" parent="SShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="ZShape" type="GridContainer" parent="."]
+modulate = Color(0.108888, 0.705464, 0.727171, 1)
+layout_mode = 2
+columns = 3
+
+[node name="Cell" type="TextureRect" parent="ZShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell2" type="TextureRect" parent="ZShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell" type="TextureRect" parent="ZShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell2" type="TextureRect" parent="ZShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell3" type="TextureRect" parent="ZShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell4" type="TextureRect" parent="ZShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell3" type="TextureRect" parent="ZShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell4" type="TextureRect" parent="ZShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell5" type="TextureRect" parent="ZShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="TShape" type="GridContainer" parent="."]
+modulate = Color(0.911438, 0.496391, 0.190827, 1)
+layout_mode = 2
+columns = 3
+
+[node name="BlankCell" type="TextureRect" parent="TShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell" type="TextureRect" parent="TShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell2" type="TextureRect" parent="TShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell2" type="TextureRect" parent="TShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell3" type="TextureRect" parent="TShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell4" type="TextureRect" parent="TShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell3" type="TextureRect" parent="TShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell4" type="TextureRect" parent="TShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell5" type="TextureRect" parent="TShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="IShape" type="GridContainer" parent="."]
+modulate = Color(0.504869, 0.618891, 0.86021, 1)
+layout_mode = 2
+columns = 4
+
+[node name="BlankCell" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell2" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell3" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell4" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell" type="TextureRect" parent="IShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell2" type="TextureRect" parent="IShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell3" type="TextureRect" parent="IShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell4" type="TextureRect" parent="IShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell5" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell6" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell7" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell8" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell9" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell10" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell11" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="BlankCell12" type="TextureRect" parent="IShape"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="CShape" type="GridContainer" parent="."]
+modulate = Color(0.976471, 0.184314, 0, 1)
+layout_mode = 2
+columns = 2
+
+[node name="Cell" type="TextureRect" parent="CShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell2" type="TextureRect" parent="CShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell3" type="TextureRect" parent="CShape"]
+layout_mode = 2
+texture = ExtResource("1_0dupo")
+
+[node name="Cell4" type="TextureRect" parent="CShape"]
 layout_mode = 2
 texture = ExtResource("1_0dupo")
