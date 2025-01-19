@@ -3,6 +3,7 @@
 [node name="AboutBox" type="AcceptDialog"]
 auto_translate_mode = 1
 title = "How To Play"
+size = Vector2i(421, 210)
 dialog_text = "* Spacebar - Drop the shape instantly
 * Down arrow / S key - Slowly drop the shape
 * Left arrow / A Key - Move left

@@ -171,7 +171,6 @@ layout_mode = 2
 texture = ExtResource("2_t8rbm")
 
 [node name="AboutBox" parent="." instance=ExtResource("4_hb4xs")]
-size = Vector2i(421, 210)
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/LeftSide/VBox/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/LeftSide/VBox/Pause" to="." method="_on_pause_pressed"]
