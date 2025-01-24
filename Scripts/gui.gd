@@ -1,4 +1,5 @@
-extends CenterContainer
+extends Control
+signal pressed
 
 @onready var playAreaGrid := get_node("PanelContainer/HBoxContainer/RightSide/PlayAreaGrid")
 @onready var nextShapeGrid := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NextShapeContainer/NextShapeGrid")
@@ -6,6 +7,9 @@ extends CenterContainer
 @onready var newGameButton := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NewGame")
 @onready var pauseButton := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/Pause")
 @onready var aboutButton := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/About")
+
+var current_music: float = 0
+var current_sound: float = 0
 
 const TOTAL_CELLS: int = 200
 const CELL_BACKGROUND: Color = Color(.1, .1, .1) # Off-black
@@ -31,30 +35,32 @@ func clear_cells(node, color: Color) -> void:
 func _process(delta: float) -> void:
 	pass
 
-
-## Button Presses
-
+# Button Presses
 func _on_about_pressed() -> void:
 	aboutBox.popup_centered()
-	emit_signal("button_pressed", "About")
-
-
-func _on_music_toggle_pressed() -> void:
-	emit_signal("button_pressed", "Music")
-
-func _on_pause_pressed() -> void:
-	emit_signal("button_pressed", "Pause")
+	pressed.emit("About")
 
 func _on_new_game_pressed() -> void:
-	emit_signal("button_pressed", "NewGame")
+	pressed.emit("NewGame")
 
-func _set_button_state(button: Node, state: bool) -> void:
+func _set_button_state(button: Button, state: bool) -> void:
 	button.set_disabled(state)
 
-func _set_button_text(button: Node, new_text: String) -> void:
+func set_button_text(button: Button, new_text: String) -> void:
 	button.set_text(new_text)
 
-func _set_button_states(is_playing: bool) -> void:
+func set_button_states(is_playing: bool) -> void:
 	_set_button_state(newGameButton, is_playing)
 	_set_button_state(aboutButton, is_playing)
 	_set_button_state(pauseButton, !is_playing)
+
+func _on_pause_pressed() -> void:
+	pressed.emit("Pause")
+
+func _on_music_slider_value_changed(value: float) -> void:
+	current_music = value
+	pressed.emit("Music")
+
+func _on_sound_slider_value_changed(value: float) -> void:
+	current_sound = value
+	pressed.emit("Value")

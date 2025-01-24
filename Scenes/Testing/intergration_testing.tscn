@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhxq30rrnq0ce"]
 
-[ext_resource type="Script" path="res://Scenes/Testing/intergration_testing.gd" id="1_p588q"]
+[ext_resource type="Script" path="res://Scripts/intergration_testing.gd" id="1_p588q"]
 [ext_resource type="FontFile" uid="uid://cda5d38i0lq0j" path="res://Assets/Font/Xanmono-Regular.ttf" id="2_315qe"]
 
 [node name="IntergrationTesting" type="Control"]

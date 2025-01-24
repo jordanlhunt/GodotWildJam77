@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://djjybhh1j6q7u"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_6txkp"]
+[ext_resource type="PackedScene" uid="uid://bu0n0a5ojo5q6" path="res://Scenes/UI/GUI.tscn" id="2_ld78c"]
+[ext_resource type="PackedScene" uid="uid://0kciod2d2lr2" path="res://Scenes/Audio/AudioStream.tscn" id="3_n5d2c"]
+[ext_resource type="AudioStream" uid="uid://dw2p1o1ipaq8k" path="res://Assets/Music/caffeine_crazed_coin-op_kids.mp3" id="4_dopin"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_6txkp")
+
+[node name="GUI" parent="." instance=ExtResource("2_ld78c")]
+
+[node name="AudioStream" parent="." instance=ExtResource("3_n5d2c")]
+stream = ExtResource("4_dopin")

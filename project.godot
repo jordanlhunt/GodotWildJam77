@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="GodotWildJam77"
-run/main_scene="res://Scenes/block_shape.tscn"
+run/main_scene="res://Scenes/Main/Main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Shapes="*res://Scenes/block_shape.tscn"
+Shapes="*res://Scenes/Blocks/block_shape.tscn"
 
 [display]
 
