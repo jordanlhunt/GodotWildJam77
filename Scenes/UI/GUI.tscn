@@ -172,8 +172,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/HBoxContainer/RightSide"]
+layout_mode = 2
+color = Color(0.0273612, 0.002118, 0, 1)
+
 [node name="PlayAreaGrid" type="GridContainer" parent="PanelContainer/HBoxContainer/RightSide"]
 layout_mode = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
 columns = 10
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/RightSide/PlayAreaGrid"]

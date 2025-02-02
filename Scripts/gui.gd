@@ -1,6 +1,7 @@
 extends Control
 signal pressed
 
+
 @onready var playAreaGrid := get_node("PanelContainer/HBoxContainer/RightSide/PlayAreaGrid")
 @onready var nextShapeGrid := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NextShapeContainer/NextShapeGrid")
 @onready var aboutBox := get_node("AboutBox")
@@ -18,8 +19,7 @@ const TRANSPARENT: Color = Color(0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_cells(playAreaGrid, TOTAL_CELLS)
-	clear_cells(playAreaGrid, CELL_BACKGROUND)
-	clear_cells(nextShapeGrid, TRANSPARENT)
+	clear_all_cells()
 
 func add_cells(node, numOfCellsToAdd: int) -> void:
 	var currentNumberOfCells = node.get_child_count()
@@ -27,9 +27,13 @@ func add_cells(node, numOfCellsToAdd: int) -> void:
 		node.add_child(node.get_child(0).duplicate())
 		currentNumberOfCells += 1
 
-func clear_cells(node, color: Color) -> void:
+func clear_all_cells() -> void:
+	clear_cells(playAreaGrid)
+	clear_cells(nextShapeGrid)
+
+func clear_cells(node) -> void:
 	for cell in node.get_children():
-		cell.modulate = color
+		cell.modulate = TRANSPARENT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -9,6 +9,11 @@ enum {
 	PAUSE
  }
 
+enum {
+	LEFT,
+	RIGHT
+}
+
 @onready var guiNode := get_node("GUI")
 @onready var musicPlayerNode := get_node("AudioStream")
 var current_state = STOPPED
@@ -18,6 +23,12 @@ var playButton: BaseButton
 var musicSlider: HSlider
 var soundSlider: HSlider
 var MIN_AUDIO_LEVEL
+
+
+var grid_cell_occupied = []
+var number_of_columns: int
+var currentShapeData: ShapeData
+var currentShapePosition
 
 const ENABLED: bool = false
 const DISABLED: bool = true
@@ -36,6 +47,7 @@ func _ready() -> void:
 	musicSlider.value_changed.connect(_slider_value_changed.bind(musicSlider.name))
 	soundSlider.value_changed.connect(_slider_value_changed.bind(soundSlider.name))
 	guiNode.set_button_states(ENABLED)
+	number_of_columns = guiNode.playAreaGrid.get_columns()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,13 +74,13 @@ func _button_pressed(button_name) -> void:
 func _slider_value_changed(value, slider_name) -> void:
 	if slider_name == "MusicSlider":
 		if current_state == PLAYING:
-			if value > MIN_AUDIO_LEVEL:
+			if _is_music_on():
 				print("Music on. Music Level:", value)
 				_set_music(PLAY)
 			else:
 				_set_music(STOP)
 	elif slider_name == "SoundSlider":
-		if value > MIN_AUDIO_LEVEL:
+		if _is_sound_on():
 			print("Sound on. Sound Level:", value)
 		else:
 			print("Sound off")
@@ -96,11 +108,49 @@ func _is_music_on() -> bool:
 
 func _is_sound_on() -> bool:
 	return soundSlider.value > MIN_AUDIO_LEVEL
-	
-	
-func _game_over():
+
+func _game_over() -> void:
 	guiNode.set_button_states(ENABLED)
 	if _is_music_on():
 		_set_music(STOP)
 	current_state = STOPPED
 	print("Game Stopped")
+
+func clear_grid() -> void:
+	grid_cell_occupied.clear()
+	grid_cell_occupied.resize(guiNode.playAreaGrid.get_child_count())
+	for i in grid_cell_occupied.size():
+		grid_cell_occupied[i] = false
+	guiNode.clear_all_cells()
+
+
+func place_space(index: int, add_tiles: bool = false, is_locked: bool = false, color: Color = Color(0)) -> bool:
+	var is_valid := true
+	var current_shape_size := currentShapeData.coordinates.size()
+	var current_shape_offset = currentShapeData.coordinates[0]
+	var y = 0
+	while y < current_shape_size and is_valid:
+		for x in current_shape_size:
+			if currentShapeData.grid[y][x]:
+				var grid_position = index + (y + current_shape_offset) * number_of_columns + x + current_shape_offset
+				print(grid_position)
+				if is_locked:
+					grid_cell_occupied[grid_position] = true
+				elif grid_position >= 0:
+					var column_x = index % number_of_columns + x + current_shape_offset
+					if column_x < 0 or column_x >= number_of_columns or grid_position >= grid_cell_occupied.size() or grid_cell_occupied[grid_position]:
+						is_valid = !is_valid
+						break
+					if add_tiles:
+						guiNode.playAreaGrid.get_child(grid_position).modulate = color
+		y += 1
+	return is_valid
+
+func add_shape_to_grid() -> void:
+	place_space(currentShapePosition, true, false, currentShapeData.color)
+
+func remove_shape_from_grid() -> void:
+	place_space(currentShapePosition, true)
+
+func lock_shape_to_grid() -> void:
+	place_space(currentShapePosition, false, true)

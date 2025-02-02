@@ -2,6 +2,8 @@ extends Control
 
 @onready var shape_label := get_node("Shape")
 @onready var grid_label := get_node("Grid")
+@onready var mainNode := get_node("Main")
+@onready var spinBox := get_node("SpinBox")
 
 
 var current_shape: ShapeData
@@ -41,3 +43,22 @@ func _show_grid():
 			else:
 				grid_label.text += "_"
 		grid_label.text += "\n"
+
+
+func _on_place_shape_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_add_shape_to_grid_pressed() -> void:
+	mainNode.clear_grid()
+	mainNode.currentShapeData = Shapes.get_shape()
+	mainNode.currentShapePosition = int(spinBox.value)
+	mainNode.add_shape_to_grid()
+
+
+func _on_remove_shape_from_grid_pressed() -> void:
+	mainNode.remove_shape_from_grid()
+
+
+func _on_lock_button_pressed() -> void:
+	mainNode.lock_shape_to_grid()

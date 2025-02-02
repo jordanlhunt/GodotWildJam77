@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhxq30rrnq0ce"]
+[gd_scene load_steps=4 format=3 uid="uid://bhxq30rrnq0ce"]
 
 [ext_resource type="Script" path="res://Scripts/intergration_testing.gd" id="1_p588q"]
 [ext_resource type="FontFile" uid="uid://cda5d38i0lq0j" path="res://Assets/Font/Xanmono-Regular.ttf" id="2_315qe"]
+[ext_resource type="PackedScene" uid="uid://djjybhh1j6q7u" path="res://Scenes/Main/Main.tscn" id="3_n7ts1"]
 
 [node name="IntergrationTesting" type="Control"]
 layout_mode = 3
@@ -10,53 +11,97 @@ script = ExtResource("1_p588q")
 
 [node name="Grid" type="Label" parent="."]
 layout_mode = 0
-offset_left = 224.0
-offset_top = 264.0
-offset_right = 288.0
-offset_bottom = 287.0
+offset_left = 464.0
+offset_top = 128.0
+offset_right = 528.0
+offset_bottom = 151.0
 theme_override_fonts/font = ExtResource("2_315qe")
 text = "Grid
 "
 
 [node name="Shape" type="Label" parent="."]
 layout_mode = 0
-offset_left = 224.0
-offset_top = 136.0
-offset_right = 304.0
-offset_bottom = 159.0
+offset_left = 456.0
+offset_top = 64.0
+offset_right = 536.0
+offset_bottom = 87.0
 theme_override_fonts/font = ExtResource("2_315qe")
 text = "Shape
 "
 
+[node name="RemoveShapeFromGrid" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 176.0
+offset_right = 368.0
+offset_bottom = 207.0
+theme_override_fonts/font = ExtResource("2_315qe")
+text = "Remove Shape From Grid"
+
 [node name="PickShape" type="Button" parent="."]
 layout_mode = 0
-offset_left = 160.0
-offset_top = 64.0
-offset_right = 360.0
-offset_bottom = 90.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 208.0
+offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("2_315qe")
 text = "Pick a Shape
 "
 
+[node name="AddShapeToGrid" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 288.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("2_315qe")
+text = "Add Shape To Grid
+"
+
 [node name="RotateLeft" type="Button" parent="."]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 408.0
-offset_right = 232.0
-offset_bottom = 434.0
+offset_left = 8.0
+offset_top = 88.0
+offset_right = 192.0
+offset_bottom = 114.0
 theme_override_fonts/font = ExtResource("2_315qe")
 text = "Rotate Left"
 
 [node name="RotateRight" type="Button" parent="."]
 layout_mode = 0
-offset_left = 272.0
-offset_top = 408.0
-offset_right = 472.0
-offset_bottom = 434.0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 208.0
+offset_bottom = 74.0
 theme_override_fonts/font = ExtResource("2_315qe")
 text = "Rotate Right
 "
 
+[node name="LockButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 8.0
+offset_right = 400.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("2_315qe")
+text = "Lock Shape"
+
+[node name="Main" parent="." instance=ExtResource("3_n7ts1")]
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 48.0
+offset_right = 323.063
+offset_bottom = 79.0
+min_value = -10.0
+max_value = 210.0
+value = 35.0
+alignment = 1
+
+[connection signal="pressed" from="RemoveShapeFromGrid" to="." method="_on_remove_shape_from_grid_pressed"]
 [connection signal="pressed" from="PickShape" to="." method="_on_pick_shape_pressed"]
+[connection signal="pressed" from="AddShapeToGrid" to="." method="_on_add_shape_to_grid_pressed"]
 [connection signal="pressed" from="RotateLeft" to="." method="_on_rotate_left_pressed"]
 [connection signal="pressed" from="RotateRight" to="." method="_on_rotate_right_pressed"]
+[connection signal="pressed" from="LockButton" to="." method="_on_lock_button_pressed"]
