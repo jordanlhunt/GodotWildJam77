@@ -7,10 +7,10 @@ var grid: Array # Actual cells
 var coordinates: Array
 
 func rotate_left() -> void:
-	_rotate_grid(1, -1)
+	_rotate_grid(-1, 1)
 
 func rotate_right() -> void:
-	_rotate_grid(-1, 1)
+	_rotate_grid(1, -1)
 
 func _rotate_grid(sign_of_x, sign_of_y) -> void:
 	var rotated_grid = grid.duplicate(true)

@@ -62,3 +62,24 @@ func _on_remove_shape_from_grid_pressed() -> void:
 
 func _on_lock_button_pressed() -> void:
 	mainNode.lock_shape_to_grid()
+
+func _input(event: InputEvent) -> void:
+	if mainNode:
+		var new_position = mainNode.currentShapePosition
+		var rotation_direction = null
+		if event.is_action_pressed("ui_down"):
+			new_position += mainNode.number_of_columns
+		if event.is_action_pressed("ui_up"):
+			new_position -= mainNode.number_of_columns
+		if event.is_action_pressed("ui_left"):
+			new_position -= 1
+		if event.is_action_pressed("ui_right"):
+			new_position += 1
+		if event is InputEventKey and event.is_pressed():
+			if event.keycode == KEY_Z:
+				rotation_direction = mainNode.ROTATE_RIGHT
+			if event.keycode == KEY_X:
+				rotation_direction = mainNode.ROTATE_LEFT
+		if new_position != mainNode.currentShapePosition or rotation_direction != null:
+			mainNode.move_shape(new_position, rotation_direction)
+			get_viewport().set_input_as_handled()

@@ -28,7 +28,7 @@ var MIN_AUDIO_LEVEL
 var grid_cell_occupied = []
 var number_of_columns: int
 var currentShapeData: ShapeData
-var currentShapePosition
+var currentShapePosition = 0
 
 const ENABLED: bool = false
 const DISABLED: bool = true
@@ -133,15 +133,14 @@ func place_space(index: int, add_tiles: bool = false, is_locked: bool = false, c
 		for x in current_shape_size:
 			if currentShapeData.grid[y][x]:
 				var grid_position = index + (y + current_shape_offset) * number_of_columns + x + current_shape_offset
-				print(grid_position)
 				if is_locked:
 					grid_cell_occupied[grid_position] = true
-				elif grid_position >= 0:
+				else:
 					var column_x = index % number_of_columns + x + current_shape_offset
-					if column_x < 0 or column_x >= number_of_columns or grid_position >= grid_cell_occupied.size() or grid_cell_occupied[grid_position]:
+					if column_x < 0 or column_x >= number_of_columns or grid_position >= grid_cell_occupied.size() or  grid_position >= 0 and grid_cell_occupied[grid_position] :
 						is_valid = !is_valid
 						break
-					if add_tiles:
+					if add_tiles and grid_position >= 0:
 						guiNode.playAreaGrid.get_child(grid_position).modulate = color
 		y += 1
 	return is_valid
@@ -154,3 +153,26 @@ func remove_shape_from_grid() -> void:
 
 func lock_shape_to_grid() -> void:
 	place_space(currentShapePosition, false, true)
+
+func rotate_shape(rotation_direction):
+	match rotation_direction:
+		LEFT:
+			currentShapeData.rotate_left()
+			rotation_direction = RIGHT
+		RIGHT:
+			currentShapeData.rotate_right()
+			rotation_direction = LEFT
+	return rotation_direction
+
+func move_shape(new_position, rotation_direction = null) -> bool:
+	remove_shape_from_grid()
+	# rotate shape and store undo direction
+	rotation_direction = rotate_shape(rotation_direction)
+	# Check if the place then update the position, else undo rotation
+	var is_placement_valid = place_space(new_position)
+	if is_placement_valid:
+		currentShapePosition = new_position
+	else:
+		rotate_shape(rotation_direction)
+	add_shape_to_grid()
+	return is_placement_valid
