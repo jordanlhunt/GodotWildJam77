@@ -2,12 +2,18 @@ extends Control
 signal pressed
 
 
-@onready var playAreaGrid := get_node("PanelContainer/HBoxContainer/RightSide/PlayAreaGrid")
-@onready var nextShapeGrid := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NextShapeContainer/NextShapeGrid")
 @onready var aboutBox := get_node("AboutBox")
-@onready var newGameButton := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NewGame")
-@onready var pauseButton := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/Pause")
 @onready var aboutButton := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/About")
+@onready var highScoreValue := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/PlayerDataGrid/HighScoreValue")
+@onready var levelValue := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/PlayerDataGrid/LevelValue")
+@onready var linesValue := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/PlayerDataGrid/LinesValue")
+@onready var newGameButton := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NewGame")
+@onready var nextShapeGrid := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/NextShapeContainer/NextShapeGrid")
+@onready var pauseButton := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/Pause")
+@onready var playAreaGrid := get_node("PanelContainer/HBoxContainer/RightSide/PlayAreaGrid")
+@onready var scoreValue := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/PlayerDataGrid/ScoreValue")
+@onready var musicSliderNode := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/MusicSliderContainer/MusicSlider")
+@onready var soundSliderNode := get_node("PanelContainer/HBoxContainer/LeftSide/VBox/HBoxContainer/SoundSlider")
 
 var current_music: float = 0
 var current_sound: float = 0
@@ -16,8 +22,41 @@ const TOTAL_CELLS: int = 200
 const CELL_BACKGROUND: Color = Color(.1, .1, .1) # Off-black
 const TRANSPARENT: Color = Color(0)
 
+#Properties
+
+var level: int = 1:
+	get:
+		return level
+	set(value):
+		levelValue.text = str(value)
+		level = value
+
+var score: int = 0:
+	get:
+		return score
+	set(value):
+		scoreValue.text = str(value)
+		score = value
+
+var high_score: int = 0:
+	get:
+		return high_score
+	set(value):
+		highScoreValue.text = str(value)
+		high_score = value
+
+var lines: int = 0:
+	get:
+		return high_score
+	set(value):
+		linesValue.text = str(value)
+		lines = value
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Setup Labels
+	setup_label_values()
 	add_cells(playAreaGrid, TOTAL_CELLS)
 	clear_all_cells()
 
@@ -68,3 +107,19 @@ func _on_music_slider_value_changed(value: float) -> void:
 func _on_sound_slider_value_changed(value: float) -> void:
 	current_sound = value
 	pressed.emit("Value")
+func setup_label_values() -> void:
+		levelValue.text = str(level)
+		scoreValue.text = str(score)
+		linesValue.text = str(lines)
+		highScoreValue.text = "%07d" % (high_score)
+
+func reset_stats(new_high_score = 0, new_score = 0, new_lines = 0, new_level = 0) -> void:
+		level = new_level
+		score = new_score
+		lines = new_lines
+		high_score = new_high_score
+
+func settings(data):
+	self.high_score = data.high_score
+	musicSliderNode.value = data.music
+	soundSliderNode.value = data.sound

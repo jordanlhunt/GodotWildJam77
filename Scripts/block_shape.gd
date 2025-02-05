@@ -29,7 +29,6 @@ func _ready() -> void:
 		# Remove the zero coordinate for the even-sized grids
 		if shape_size % 2 == 0:
 			data.coordinates.remove_at(size2)
-		print(data.coordinates)
 		data.grid = _get_grid(shape_size, shape.get_children())
 		_shapes.append(data)
 
