@@ -28,6 +28,7 @@ var MIN_AUDIO_LEVEL
 var grid_cell_occupied = []
 var number_of_columns: int
 var currentShapeData: ShapeData
+var nextShape: ShapeData
 var currentShapePosition = 0
 
 const ENABLED: bool = false
@@ -48,9 +49,8 @@ func _ready() -> void:
 	soundSlider.value_changed.connect(_slider_value_changed.bind(soundSlider.name))
 	guiNode.set_button_states(ENABLED)
 	number_of_columns = guiNode.playAreaGrid.get_columns()
-	guiNode.reset_stats()
-	for i in range(8):
-		update_current_score(i)
+	# Seed the random generator
+	randomize()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -94,6 +94,9 @@ func _start_game() -> void:
 	current_state = PLAYING
 	music_position = 0.0
 	_set_music(PLAY)
+	clear_grid()
+	guiNode.reset_stats(guiNode.high_score)
+	new_shape()
 
 func _set_music(toggle) -> void:
 	if toggle == PLAY:
@@ -191,3 +194,9 @@ func update_current_score(cleared_lines):
 	print("Added %d to score" % score)
 	guiNode.score += score
 	update_high_score()
+
+func new_shape():
+	if nextShape:
+		currentShapeData = nextShape
+	else:
+		currentShapeData = Shapes.get_shape()
