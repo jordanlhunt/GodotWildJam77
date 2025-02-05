@@ -48,6 +48,9 @@ func _ready() -> void:
 	soundSlider.value_changed.connect(_slider_value_changed.bind(soundSlider.name))
 	guiNode.set_button_states(ENABLED)
 	number_of_columns = guiNode.playAreaGrid.get_columns()
+	guiNode.reset_stats()
+	for i in range(8):
+		update_current_score(i)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -137,7 +140,7 @@ func place_space(index: int, add_tiles: bool = false, is_locked: bool = false, c
 					grid_cell_occupied[grid_position] = true
 				else:
 					var column_x = index % number_of_columns + x + current_shape_offset
-					if column_x < 0 or column_x >= number_of_columns or grid_position >= grid_cell_occupied.size() or  grid_position >= 0 and grid_cell_occupied[grid_position] :
+					if column_x < 0 or column_x >= number_of_columns or grid_position >= grid_cell_occupied.size() or grid_position >= 0 and grid_cell_occupied[grid_position]:
 						is_valid = !is_valid
 						break
 					if add_tiles and grid_position >= 0:
@@ -176,3 +179,15 @@ func move_shape(new_position, rotation_direction = null) -> bool:
 		rotate_shape(rotation_direction)
 	add_shape_to_grid()
 	return is_placement_valid
+
+func update_high_score() -> void:
+	if guiNode.score > guiNode.high_score:
+		guiNode.high_score = guiNode.score
+
+func update_current_score(cleared_lines):
+	guiNode.lines += cleared_lines
+	print("Cleared %d lines" % cleared_lines)
+	var score = 10 * int(pow(2, cleared_lines - 1))
+	print("Added %d to score" % score)
+	guiNode.score += score
+	update_high_score()

@@ -47,7 +47,7 @@ var high_score: int = 0:
 
 var lines: int = 0:
 	get:
-		return high_score
+		return lines
 	set(value):
 		linesValue.text = str(value)
 		lines = value
