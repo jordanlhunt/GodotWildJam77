@@ -123,3 +123,12 @@ func settings(data):
 	self.high_score = data.high_score
 	musicSliderNode.value = data.music
 	soundSliderNode.value = data.sound
+
+func set_next_shape(next_shape: ShapeData) -> void:
+	clear_cells(next_shape)
+	var i: int = 0
+	for column in next_shape.coordinates.size():
+		for row in [0, 1]:
+			if next_shape.grid[row][column]:
+				next_shape.get_child(i).modulate = next_shape.color
+			i += 1
