@@ -90,7 +90,7 @@ func setup_label_values() -> void:
 		scoreValue.text = str(score)
 		linesValue.text = str(lines)
 		highScoreValue.text = "%07d" % (high_score)
-func reset_stats(new_high_score = 0, new_score = 0, new_lines = 0, new_level = 0) -> void:
+func reset_stats(new_high_score = 0, new_score = 0, new_lines = 0, new_level = 1) -> void:
 		level = new_level
 		score = new_score
 		lines = new_lines

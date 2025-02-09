@@ -23,3 +23,7 @@ Shapes="*res://Scenes/Blocks/block_shape.tscn"
 
 window/size/viewport_width=600
 window/size/viewport_height=1024
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")

@@ -21,18 +21,22 @@ var playButton: BaseButton
 var musicSlider: HSlider
 var soundSlider: HSlider
 var MIN_AUDIO_LEVEL
-var grid_cell_occupied = []
+var grid_play_space = []
 var number_of_columns: int
 var currentShapeData: ShapeData
 var nextShape: ShapeData
 var currentShapePosition = 0
 var total_dropped_shapes = 0
+var bonus = 0
 const ENABLED: bool = false
 const DISABLED: bool = true
 const STARTING_SHAPE_POSITION: int = 5
 const TICK_SPEED: float = 1.0
 const SOFT_DROP_MULTIPLE: int = 10
 const MAX_LEVEL: int = 100
+const END_POSITION: int = 25
+const WAIT_TIME: float = .15
+const REPEAT_DELAY: float = 0.05
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	playButton = guiNode.find_child("NewGame")
@@ -112,10 +116,10 @@ func _game_over() -> void:
 	current_state = STOPPED
 	print("Game Stopped")
 func clear_grid() -> void:
-	grid_cell_occupied.clear()
-	grid_cell_occupied.resize(guiNode.playAreaGrid.get_child_count())
-	for i in grid_cell_occupied.size():
-		grid_cell_occupied[i] = false
+	grid_play_space.clear()
+	grid_play_space.resize(guiNode.playAreaGrid.get_child_count())
+	for i in grid_play_space.size():
+		grid_play_space[i] = false
 	guiNode.clear_all_cells()
 func place_space(index: int, add_tiles: bool = false, is_locked: bool = false, color: Color = Color(0)) -> bool:
 	var is_valid := true
@@ -127,10 +131,10 @@ func place_space(index: int, add_tiles: bool = false, is_locked: bool = false, c
 			if currentShapeData.grid[y][x]:
 				var grid_position = index + (y + current_shape_offset) * number_of_columns + x + current_shape_offset
 				if is_locked:
-					grid_cell_occupied[grid_position] = true
+					grid_play_space[grid_position] = true
 				else:
 					var column_x = index % number_of_columns + x + current_shape_offset
-					if column_x < 0 or column_x >= number_of_columns or grid_position >= grid_cell_occupied.size() or grid_position >= 0 and grid_cell_occupied[grid_position]:
+					if column_x < 0 or column_x >= number_of_columns or grid_position >= grid_play_space.size() or grid_position >= 0 and grid_play_space[grid_position]:
 						is_valid = !is_valid
 						break
 					if add_tiles and grid_position >= 0:
@@ -186,6 +190,7 @@ func new_shape() -> void:
 	normal_drop()
 	level_up()
 func normal_drop() -> void:
+	print("[normal_drop()] - guiNode.level == %d" % guiNode.level)
 	timerNode.start(TICK_SPEED / guiNode.level)
 func soft_drop() -> void:
 	timerNode.stop()
@@ -201,3 +206,97 @@ func increase_level() -> void:
 	if guiNode.level < MAX_LEVEL:
 		guiNode.level += 1
 		timerNode.set_wait_time(TICK_SPEED / guiNode.level)
+func move_left() -> void:
+	if currentShapePosition % number_of_columns > 0:
+		move_shape(currentShapePosition - 1)
+func move_right() -> void:
+	if currentShapePosition % number_of_columns < number_of_columns - 1:
+		move_shape(currentShapePosition + 1)
+func _on_timer_timeout() -> void:
+	var new_position = currentShapePosition + number_of_columns
+	if (move_shape(new_position)):
+		guiNode.score += bonus
+		update_high_score()
+	else:
+		if new_position <= END_POSITION:
+			_game_over()
+		else:
+			lock_shape_to_grid()
+			check_rows_for_clear()
+			new_shape()
+func check_rows_for_clear() -> void:
+	var i = grid_play_space.size() - 1
+	var x = 0
+	var rows = 0
+	while i >= 0:
+		if grid_play_space[i]:
+			x += 1
+			i -= 1
+			# Found a complete row
+			if x == number_of_columns:
+				rows += 1
+				x = 0
+		else:
+			i += x
+			x = 0
+			if rows > 0:
+				clear_row_score(i, rows)
+			rows = 0
+			i -= number_of_columns
+func clear_row_score(i, rows) -> void:
+	add_to_score(rows)
+	print("[clear_rows_score()] Rows: %d" % rows)
+	var number_of_cells = rows * number_of_columns
+	for cell in number_of_cells:
+		guiNode.playAreaGrid.get_child(i + cell + 1).modulate = Color(0)
+	pause()
+	await get_tree().create_timer(0.3).timeout
+	pause(false)
+	# Move cells downward
+	var new_destination = i + number_of_cells
+	while i >= 0:
+		grid_play_space[new_destination] = grid_play_space[i]
+		guiNode.playAreaGrid.get_child(new_destination).modulate = guiNode.playAreaGrid.get_child(i).modulate
+		if i == 0:
+			grid_play_space[i] = false
+			guiNode.playAreaGrid.get_child(i).modulate = Color(0)
+		i -= 1
+		new_destination -= 1
+func pause(value: bool = true):
+	get_tree().paused = value
+func add_to_score(rows) -> void:
+	pass
+func _input(event: InputEvent) -> void:
+	if current_state == PLAYING:
+		if event.is_action_pressed("ui_page_up"):
+			increase_level()
+		if event.is_action_pressed("ui_down"):
+			bonus = 2
+			soft_drop()
+		if event.is_action_pressed("ui_accept"):
+			hard_drop()
+		if event.is_action_pressed("ui_left"):
+			move_left()
+			$LeftTimer.start(WAIT_TIME)
+		if event.is_action_pressed("ui_left"):
+			$LeftTimer.stop()
+		if event.is_action_pressed("ui_right"):
+			move_right()
+			$RightTimer.start(WAIT_TIME)
+		if event.is_action_pressed("ui_right"):
+			$RightTimer.stop()
+		if event.is_action_pressed("ui_up"):
+			if event.keycode == KEY_SHIFT:
+				move_shape(currentShapePosition, RIGHT)
+			else:
+				move_shape(currentShapePosition, LEFT)
+		if event.is_action_pressed("ui_cancel"):
+			_game_over()
+		if event is InputEventKey:
+			get_viewport().set_input_as_handled()
+func _on_left_timer_timeout() -> void:
+	$LeftTimer.wait_time = REPEAT_DELAY
+	move_left()
+func _on_right_timer_timeout() -> void:
+	$RightTimer.wait_time = REPEAT_DELAY
+	move_right()
